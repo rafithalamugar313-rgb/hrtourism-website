@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HR Tourism | International Travel & Tours</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="container nav-container">
+            <a href="#" class="logo"><img src="logo.jpeg" alt="HR Tourism Logo" class="logo-img"></a>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#flights">Flights</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section with Flight Search -->
+    <header id="home" class="hero">
+        <div class="hero-overlay"></div>
+        <div class="container hero-content">
+            <h1>TRAVEL BEYOND LIMITS</h1>
+            <p>Your Premium Gateway to International travel from Home to the Globe.</p>
+            
+            <div class="booking-widget" id="flights">
+                <h2><i class="fas fa-plane-departure"></i> Book Your Flight</h2>
+                <form id="flightForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="fromLocation">From</label>
+                            <select id="fromLocation" required>
+                                <optgroup label="India (Kerala & Nearby)">
+                                    <option value="Mangalore (IXE)" selected>Mangalore (IXE)</option>
+                                    <option value="Kochi (COK)">Kochi (COK)</option>
+                                    <option value="Kozhikode (CCJ)">Kozhikode (CCJ)</option>
+                                    <option value="Trivandrum (TRV)">Trivandrum (TRV)</option>
+                                    <option value="Kannur (CNN)">Kannur (CNN)</option>
+                                    <option value="Mumbai (BOM)">Mumbai (BOM)</option>
+                                    <option value="Delhi (DEL)">Delhi (DEL)</option>
+                                    <option value="Bangalore (BLR)">Bangalore (BLR)</option>
+                                    <option value="Chennai (MAA)">Chennai (MAA)</option>
+                                </optgroup>
+                                <optgroup label="Middle East">
+                                    <option value="Dubai (DXB)">Dubai (DXB)</option>
+                                    <option value="Abu Dhabi (AUH)">Abu Dhabi (AUH)</option>
+                                    <option value="Sharjah (SHJ)">Sharjah (SHJ)</option>
+                                    <option value="Doha (DOH)">Doha (DOH)</option>
+                                    <option value="Muscat (MCT)">Muscat (MCT)</option>
+                                    <option value="Kuwait (KWI)">Kuwait (KWI)</option>
+                                    <option value="Jeddah (JED)">Jeddah (JED)</option>
+                                    <option value="Riyadh (RUH)">Riyadh (RUH)</option>
+                                    <option value="Bahrain (BAH)">Bahrain (BAH)</option>
+                                </optgroup>
+                                <optgroup label="Other International">
+                                    <option value="London (LHR)">London (LHR)</option>
+                                    <option value="Singapore (SIN)">Singapore (SIN)</option>
+                                    <option value="Kuala Lumpur (KUL)">Kuala Lumpur (KUL)</option>
+                                    <option value="Bangkok (BKK)">Bangkok (BKK)</option>
+                                    <option value="New York (JFK)">New York (JFK)</option>
+                                </optgroup>
+                            </select>
+                        </div>
+                        <div class="form-group swap-icon">
+                            <i class="fas fa-exchange-alt"></i>
+                        </div>
+                        <div class="form-group">
+                            <label for="toLocation">To</label>
+                            <select id="toLocation" required>
+                                <optgroup label="India (Kerala & Nearby)">
+                                    <option value="Mangalore (IXE)">Mangalore (IXE)</option>
+                                    <option value="Kochi (COK)">Kochi (COK)</option>
+                                    <option value="Kozhikode (CCJ)">Kozhikode (CCJ)</option>
+                                    <option value="Trivandrum (TRV)">Trivandrum (TRV)</option>
+                                    <option value="Kannur (CNN)">Kannur (CNN)</option>
+                                    <option value="Mumbai (BOM)">Mumbai (BOM)</option>
+                                    <option value="Delhi (DEL)">Delhi (DEL)</option>
+                                    <option value="Bangalore (BLR)">Bangalore (BLR)</option>
+                                    <option value="Chennai (MAA)">Chennai (MAA)</option>
+                                </optgroup>
+                                <optgroup label="Middle East">
+                                    <option value="Dubai (DXB)" selected>Dubai (DXB)</option>
+                                    <option value="Abu Dhabi (AUH)">Abu Dhabi (AUH)</option>
+                                    <option value="Sharjah (SHJ)">Sharjah (SHJ)</option>
+                                    <option value="Doha (DOH)">Doha (DOH)</option>
+                                    <option value="Muscat (MCT)">Muscat (MCT)</option>
+                                    <option value="Kuwait (KWI)">Kuwait (KWI)</option>
+                                    <option value="Jeddah (JED)">Jeddah (JED)</option>
+                                    <option value="Riyadh (RUH)">Riyadh (RUH)</option>
+                                    <option value="Bahrain (BAH)">Bahrain (BAH)</option>
+                                </optgroup>
+                                <optgroup label="Other International">
+                                    <option value="London (LHR)">London (LHR)</option>
+                                    <option value="Singapore (SIN)">Singapore (SIN)</option>
+                                    <option value="Kuala Lumpur (KUL)">Kuala Lumpur (KUL)</option>
+                                    <option value="Bangkok (BKK)">Bangkok (BKK)</option>
+                                    <option value="New York (JFK)">New York (JFK)</option>
+                                </optgroup>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="travelDate">Date</label>
+                            <input type="date" id="travelDate" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="passengers">Passengers</label>
+                            <input type="number" id="passengers" value="1" min="1" required>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn-primary">Get Best Price via WhatsApp <i class="fab fa-whatsapp"></i></button>
+                </form>
+            </div>
+        </div>
+    </header>
+
+    <!-- Services Section -->
+    <section id="services" class="services section">
+        <div class="container">
+            <h2 class="section-title">Our Services</h2>
+            <div class="services-grid-compact">
+                <div class="service-item"><i class="fas fa-passport"></i> Passport Assistance</div>
+                <div class="service-item"><i class="fas fa-plane"></i> Domestic & International Air Ticketing</div>
+                <div class="service-item"><i class="fas fa-id-card"></i> Visiting Visas</div>
+                <div class="service-item"><i class="fas fa-heart"></i> Honeymoon Packages</div>
+                <div class="service-item"><i class="fas fa-file-signature"></i> Saudi Wakkala Services</div>
+                <div class="service-item"><i class="fas fa-user-check"></i> Emigration Clearance</div>
+                <div class="service-item"><i class="fas fa-kaaba"></i> Umrah Packages</div>
+                <div class="service-item"><i class="fas fa-stamp"></i> Visa Stamping</div>
+                <div class="service-item"><i class="fas fa-certificate"></i> Certificate Attestation</div>
+                <div class="service-item"><i class="fas fa-train"></i> Train Tickets</div>
+                <div class="service-item"><i class="fas fa-bus"></i> Bus Tickets</div>
+                <div class="service-item"><i class="fas fa-ship"></i> Cruises</div>
+                <div class="service-item"><i class="fas fa-map-marked-alt"></i> Tours</div>
+                <div class="service-item"><i class="fas fa-hotel"></i> Worldwide Hotel Reservation</div>
+                <div class="service-item"><i class="fas fa-users"></i> Group Tours!</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Partners Section -->
+    <section id="partners" class="partners section">
+        <div class="container">
+            <h2 class="section-title">Our Airline Partners</h2>
+            <div class="partners-grid">
+                <div class="partner-tag"><i class="fas fa-plane"></i> Emirates</div>
+                <div class="partner-tag"><i class="fas fa-plane"></i> Qatar Airways</div>
+                <div class="partner-tag"><i class="fas fa-plane"></i> Etihad Airways</div>
+                <div class="partner-tag"><i class="fas fa-plane"></i> British Airways</div>
+                <div class="partner-tag"><i class="fas fa-plane"></i> Saudia</div>
+                <div class="partner-tag"><i class="fas fa-plane"></i> Cathay Pacific</div>
+                <div class="partner-tag"><i class="fas fa-plane"></i> Gulf Air</div>
+                <div class="partner-tag"><i class="fas fa-plane"></i> IndiGo</div>
+                <div class="partner-tag"><i class="fas fa-plane"></i> Air India Express</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="container footer-content">
+            <div class="footer-col">
+                <h3>HR TOURISM</h3>
+                <p>From the heart of Kerala to the wonders of the world, HR Tourism creates seamless, premium travel experiences that inspire discovery, adventure, and unforgettable memories.</p>
+            </div>
+            <div class="footer-col">
+                <h3>Contact Us</h3>
+                <p><a href="https://maps.app.goo.gl/7PeKquMegSsxkCij9?g_st=iwb" target="_blank" style="color: inherit; text-decoration: none; transition: color 0.3s;" onmouseover="this.style.color='var(--primary-color)'" onmouseout="this.style.color='inherit'"><i class="fas fa-map-marker-alt"></i> KODINGAR SHOPPING COMPLEX<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;FIRST FLOOR, KASARAGOD ROAD<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SEETHANGOLI JN, 671321</a></p>
+                <p><i class="fas fa-envelope"></i> info@hrtourism.in</p>
+                <p><i class="fas fa-phone"></i> +91 9645391161, +91 7907575887</p>
+            </div>
+            <div class="footer-col">
+                <h3>Follow Us</h3>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://www.instagram.com/hrtourism.in" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 HR Tourism.in. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Scrolling Airplane Animation -->
+    <i class="fas fa-plane scroll-plane" id="scrollPlane"></i>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
