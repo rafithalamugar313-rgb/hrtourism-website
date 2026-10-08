@@ -4,6 +4,7 @@
     --text-color: #e2e8f0; /* Light text for dark mode */
     --light-bg: #0f172a; /* Darkest background */
     --white: #1e293b; /* Dark slate for cards */
+    --nav-height: 110px;
 }
 
 * {
@@ -50,7 +51,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 110px;
+    height: var(--nav-height);
 }
 
 .logo {
@@ -87,12 +88,14 @@ body {
 
 /* Hero Section */
 .hero {
-    height: 100vh;
+    min-height: calc(100vh - var(--nav-height));
+    min-height: calc(100svh - var(--nav-height));
     background: url('https://images.unsplash.com/photo-1503614472-8c93d56e92ce?auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;
     position: relative;
     display: flex;
     align-items: center;
-    margin-top: 110px;
+    margin-top: var(--nav-height);
+    padding: 48px 0;
 }
 
 .hero-overlay {
@@ -117,36 +120,29 @@ body {
     font-weight: 900;
     text-transform: uppercase;
     text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-    opacity: 0;
-    animation: slideUpFade 1.5s ease-out forwards, textGlow 2.5s infinite alternate 1.5s;
-}
-
-@keyframes slideUpFade {
-    0% {
-        opacity: 0;
-        transform: translateY(40px);
-        letter-spacing: -2px;
-    }
-    100% {
-        opacity: 1;
-        transform: translateY(0);
-        letter-spacing: 2px;
-    }
-}
-
-@keyframes textGlow {
-    0% {
-        text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-    }
-    100% {
-        text-shadow: 2px 2px 4px rgba(0,0,0,0.5), 0 0 15px rgba(255, 193, 7, 0.8), 0 0 25px rgba(255, 193, 7, 0.5);
-    }
+    animation: heroEnter 800ms cubic-bezier(0.2, 0.7, 0.2, 1) 100ms both;
 }
 
 .hero p {
     font-size: 1.5rem;
     margin-bottom: 40px;
     text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+    animation: heroEnter 800ms cubic-bezier(0.2, 0.7, 0.2, 1) 240ms both;
+}
+
+.booking-widget {
+    animation: heroEnter 800ms cubic-bezier(0.2, 0.7, 0.2, 1) 380ms both;
+}
+
+@keyframes heroEnter {
+    from {
+        opacity: 0;
+        transform: translateY(22px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 /* Booking Widget */
@@ -359,30 +355,42 @@ footer {
     color: #aaa;
 }
 
-/* Scroll Airplane Animation */
-.scroll-plane {
+/* Scroll travel animations */
+.scroll-plane,
+.scroll-train {
     position: fixed;
-    font-size: 3rem;
     color: var(--primary-color);
     z-index: 999;
     pointer-events: none;
-    opacity: 0.5;
     top: -100px;
     left: -100px;
-    transition: transform 0.1s ease-out;
+    transition: transform 0.1s ease-out, opacity 0.2s ease-out;
     filter: drop-shadow(0 4px 6px rgba(0,0,0,0.5));
+}
+
+.scroll-plane {
+    font-size: 3rem;
+    opacity: 0.5;
+}
+
+.scroll-train {
+    font-size: 3rem;
+    opacity: 0;
 }
 
 /* Responsive */
 @media(max-width: 768px) {
+    :root {
+        --nav-height: 80px;
+    }
     .nav-container {
-        height: 80px;
+        height: var(--nav-height);
     }
     .logo-img {
         height: 60px;
     }
     .hero {
-        margin-top: 80px;
+        padding: 36px 0;
     }
     .form-row {
         flex-direction: column;
@@ -396,12 +404,33 @@ footer {
         line-height: 1.2;
     }
     .hero p {
-        font-size: 1.2rem;
+        font-size: 1rem;
+        margin-bottom: 28px;
+    }
+    .hero h1,
+    .hero p,
+    .booking-widget {
+        animation-duration: 600ms;
     }
     .nav-links {
         display: none;
     }
-    .scroll-plane {
+    .scroll-plane,
+    .scroll-train {
         font-size: 2rem;
+    }
+}
+
+@media(prefers-reduced-motion: reduce) {
+    #scrollPlane,
+    #scrollTrain {
+        display: none;
+    }
+    .hero h1,
+    .hero p,
+    .booking-widget {
+        animation: none;
+        opacity: 1;
+        transform: none;
     }
 }

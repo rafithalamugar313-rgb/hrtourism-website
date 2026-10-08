@@ -50,33 +50,38 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Scroll Airplane Animation
-    window.addEventListener('scroll', () => {
+    // Scroll travel animations
+    const updateTravelAnimations = () => {
         const scrollY = window.scrollY;
-        // Total scrollable height
         const maxScroll = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
-        
-        // Ensure scroll percentage is between 0 and 1
         const scrollPercent = Math.min(1, Math.max(0, scrollY / maxScroll));
-        
+        const width = window.innerWidth;
+        const height = window.innerHeight;
+
         const plane = document.getElementById('scrollPlane');
-        if(plane) {
-            // Screen dimensions
-            const w = window.innerWidth;
-            const h = window.innerHeight;
-            
-            // X goes from left (-50px) to right (w + 50px)
-            const x = (scrollPercent * (w + 100)) - 50;
-            
-            // Y uses a slight sine wave to look like flying, starting from top quarter down to middle
-            const y = (h * 0.2) + Math.sin(scrollPercent * Math.PI) * (h * 0.4);
-            
-            // Rotation tilts the plane as it moves up and down
+        if (plane) {
+            const x = (scrollPercent * (width + 100)) - 50;
+            const y = (height * 0.2) + Math.sin(scrollPercent * Math.PI) * (height * 0.4);
             const slope = Math.cos(scrollPercent * Math.PI);
-            const rotation = 45 + (slope * 20); // base 45 degrees, tilts up to +/- 20 degrees
-            
+            const rotation = 45 + (slope * 20);
             plane.style.transform = `translate(${x}px, ${y}px) rotate(${rotation}deg)`;
         }
-    });
+
+        const train = document.getElementById('scrollTrain');
+        if (train) {
+            const trainStart = 0.28;
+            const trainEnd = 0.58;
+            const trainProgress = Math.min(1, Math.max(0, (scrollPercent - trainStart) / (trainEnd - trainStart)));
+            const trainX = (trainProgress * (width + 160)) - 80;
+            const trainY = height * 0.78;
+
+            train.style.transform = `translate(${trainX}px, ${trainY}px)`;
+            train.style.opacity = String(Math.sin(trainProgress * Math.PI) * 0.72);
+        }
+    };
+
+    window.addEventListener('scroll', updateTravelAnimations, { passive: true });
+    window.addEventListener('resize', updateTravelAnimations);
+    updateTravelAnimations();
 });
 
