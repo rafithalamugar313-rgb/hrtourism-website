@@ -120,18 +120,39 @@ body {
     font-weight: 900;
     text-transform: uppercase;
     text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-    animation: heroEnter 800ms cubic-bezier(0.2, 0.7, 0.2, 1) 100ms both;
+}
+
+.hero-letter {
+    display: inline-block;
+    white-space: pre;
+    opacity: 0;
+    animation: letterJoin 460ms cubic-bezier(0.2, 0.75, 0.25, 1) calc(70ms + var(--letter-index) * 24ms) both;
+}
+
+.mobile-title-break {
+    display: none;
+}
+
+@keyframes letterJoin {
+    from {
+        opacity: 0;
+        transform: translateX(calc(var(--letter-direction) * 70px)) rotate(calc(var(--letter-direction) * 8deg));
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0) rotate(0);
+    }
 }
 
 .hero p {
     font-size: 1.5rem;
     margin-bottom: 40px;
     text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
-    animation: heroEnter 800ms cubic-bezier(0.2, 0.7, 0.2, 1) 240ms both;
+    animation: heroEnter 800ms cubic-bezier(0.2, 0.7, 0.2, 1) 1020ms both;
 }
 
 .booking-widget {
-    animation: heroEnter 800ms cubic-bezier(0.2, 0.7, 0.2, 1) 380ms both;
+    animation: heroEnter 800ms cubic-bezier(0.2, 0.7, 0.2, 1) 1160ms both;
 }
 
 @keyframes heroEnter {
@@ -403,11 +424,13 @@ footer {
         font-size: 2rem;
         line-height: 1.2;
     }
+    .mobile-title-break {
+        display: block;
+    }
     .hero p {
         font-size: 1rem;
         margin-bottom: 28px;
     }
-    .hero h1,
     .hero p,
     .booking-widget {
         animation-duration: 600ms;
@@ -429,6 +452,11 @@ footer {
     .hero h1,
     .hero p,
     .booking-widget {
+        animation: none;
+        opacity: 1;
+        transform: none;
+    }
+    .hero-letter {
         animation: none;
         opacity: 1;
         transform: none;

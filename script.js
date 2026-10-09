@@ -1,4 +1,28 @@
 document.addEventListener('DOMContentLoaded', () => {
+    const heroTitle = document.querySelector('.hero h1');
+    if (heroTitle) {
+        const title = heroTitle.textContent.trim();
+        const mobileBreakIndex = title.indexOf('BEYOND') + 'BEYOND'.length;
+        heroTitle.setAttribute('aria-label', title);
+        const titleNodes = Array.from(title, (character, index) => {
+            if (index === mobileBreakIndex && character === ' ') {
+                const lineBreak = document.createElement('br');
+                lineBreak.className = 'mobile-title-break';
+                lineBreak.setAttribute('aria-hidden', 'true');
+                return [lineBreak];
+            }
+
+            const letter = document.createElement('span');
+            letter.className = 'hero-letter';
+            letter.setAttribute('aria-hidden', 'true');
+            letter.textContent = character;
+            letter.style.setProperty('--letter-index', index);
+            letter.style.setProperty('--letter-direction', index % 2 === 0 ? '-1' : '1');
+            return [letter];
+        }).flat();
+        heroTitle.replaceChildren(...titleNodes);
+    }
+
     // Set default date to tomorrow
     const dateInput = document.getElementById('travelDate');
     const tomorrow = new Date();
