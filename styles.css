@@ -471,7 +471,9 @@ footer {
     margin-top: 64px;
 }
 .package-category-title {
-    margin-bottom: 28px;
+    width: fit-content;
+    max-width: 100%;
+    margin: 0 auto 28px;
     color: var(--text-color);
     font-size: 1.8rem;
     text-align: center;
