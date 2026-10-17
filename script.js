@@ -23,6 +23,98 @@ document.addEventListener('DOMContentLoaded', () => {
         heroTitle.replaceChildren(...titleNodes);
     }
 
+    document.querySelectorAll('.package-carousel-controls').forEach((controls) => {
+        const trackId = controls.querySelector('[data-carousel-next]')?.getAttribute('aria-controls');
+        const track = trackId ? document.getElementById(trackId) : null;
+        const previousButton = controls.querySelector('[data-carousel-prev]');
+        const nextButton = controls.querySelector('[data-carousel-next]');
+        const progress = controls.querySelector('.carousel-progress');
+        const progressFill = controls.querySelector('.carousel-progress-fill');
+        const count = controls.querySelector('.carousel-count');
+        const cards = track ? Array.from(track.querySelectorAll('.package-item')) : [];
+        const feature = track?.closest('.package-category')?.querySelector('.destination-feature');
+        const featureImage = feature?.querySelector('.destination-feature-image');
+        const featureTitle = feature?.querySelector('h4');
+        const featureDescription = feature?.querySelector('p');
+        const featureLink = feature?.querySelector('.destination-feature-link');
+
+        if (!track || !previousButton || !nextButton || !progress || !progressFill || !count || cards.length === 0) {
+            return;
+        }
+
+        progress.setAttribute('aria-valuemax', String(cards.length));
+        let selectedCard;
+
+        const updateCarousel = () => {
+            const maxScroll = Math.max(0, track.scrollWidth - track.clientWidth);
+            const trackLeft = track.getBoundingClientRect().left;
+            const activeCardIndex = cards.reduce((closestIndex, card, index) => {
+                const distance = Math.abs(card.getBoundingClientRect().left - trackLeft);
+                const closestDistance = Math.abs(cards[closestIndex].getBoundingClientRect().left - trackLeft);
+                return distance < closestDistance ? index : closestIndex;
+            }, 0);
+            const activeCard = cards[activeCardIndex];
+            const currentCard = activeCardIndex + 1;
+
+            previousButton.disabled = track.scrollLeft <= 1;
+            nextButton.disabled = maxScroll - track.scrollLeft <= 1;
+            progress.setAttribute('aria-valuenow', String(currentCard));
+            progressFill.style.width = `${(currentCard / cards.length) * 100}%`;
+            count.textContent = `${String(currentCard).padStart(2, '0')} / ${String(cards.length).padStart(2, '0')}`;
+
+            if (activeCard !== selectedCard && featureImage && featureTitle && featureDescription && featureLink) {
+                const image = activeCard.querySelector('.package-img');
+                const title = activeCard.querySelector('h4');
+                const description = activeCard.querySelector('p');
+                const enquiryLink = activeCard.querySelector('.btn-primary');
+
+                if (image && title && description && enquiryLink) {
+                    if (featureImage.src !== image.src) {
+                        featureImage.src = image.src;
+                    }
+                    featureTitle.textContent = title.textContent;
+                    featureDescription.textContent = description.textContent;
+                    featureLink.href = enquiryLink.href;
+                    selectedCard = activeCard;
+                }
+            }
+        };
+
+        const scrollByCard = (direction) => {
+            const gap = parseFloat(window.getComputedStyle(track).columnGap) || 0;
+            const step = cards[0].getBoundingClientRect().width + gap;
+            const behavior = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth';
+
+            track.scrollBy({ left: direction * step, behavior });
+        };
+
+        cards.forEach((card) => {
+            const title = card.querySelector('h4');
+            card.tabIndex = 0;
+            card.setAttribute('role', 'button');
+            card.setAttribute('aria-label', `Preview ${title?.textContent.trim() || 'destination'}`);
+
+            const selectCard = () => {
+                const behavior = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth';
+                track.scrollTo({ left: card.offsetLeft, behavior });
+            };
+
+            card.addEventListener('click', selectCard);
+            card.addEventListener('keydown', (event) => {
+                if (event.key === 'Enter' || event.key === ' ') {
+                    event.preventDefault();
+                    selectCard();
+                }
+            });
+        });
+
+        previousButton.addEventListener('click', () => scrollByCard(-1));
+        nextButton.addEventListener('click', () => scrollByCard(1));
+        track.addEventListener('scroll', updateCarousel, { passive: true });
+        window.addEventListener('resize', updateCarousel);
+        updateCarousel();
+    });
+
     // Set default date to tomorrow
     const dateInput = document.getElementById('travelDate');
     const tomorrow = new Date();
@@ -108,4 +200,3 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('resize', updateTravelAnimations);
     updateTravelAnimations();
 });
-
